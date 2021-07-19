@@ -1,5 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions';
 
 class StreamCreate extends React.Component {
     renderError({ error, touched }){   //takes in meta and destructures error and touched
@@ -28,8 +30,8 @@ class StreamCreate extends React.Component {
     //<input {...input}/> takes all the key value pairs from formProps.input and adds as props to input element
     //like onChange = {formProps.input.onChange} and value = {formProps.input.value}  
     
-    onSubmit(formValues){
-        console.log(formValues)
+    onSubmit = (formValues) => {
+        this.props.createStream(formValues)
     }
 //if a field has same name as proptery in object returned from 'validate' function, it gets passed to renderInput
 //and is accessed as meta.error
@@ -60,7 +62,15 @@ const validate = formValues => {
     return errors
 }
 
-export default reduxForm({ 
+const formWrapped = reduxForm({ 
     form: 'streamCreate',
     validate: validate
 })(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped);
+//because we're using reduxForm and connect, the above looks better - but funcions the same as - below:
+
+// export default connect()(reduxForm({ 
+//     form: 'streamCreate',
+//     validate: validate
+// })(StreamCreate));
