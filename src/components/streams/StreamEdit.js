@@ -20,7 +20,7 @@ class StreamEdit extends React.Component{
         <div>
             <h3>Edit A Stream</h3>
             <StreamForm 
-            initialValues={{title: 'edit me', description: 'change the diaper'}}
+            initialValues={{title: this.props.stream.title, description: this.props.stream.description}}//also use lodash lib {_.pick(this.props.stream, 'title', 'description')}
             onSubmit={this.onSubmit} />
         </div>
     )
