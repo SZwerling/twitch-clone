@@ -7,6 +7,7 @@ const Modal = props => {
                                 //e.stopPropagation stops onClick=>history from acting on modal, only on background
         <div onClick={props.onDismiss} className="ui dimmer modals visible active">
             <div onClick={(e) => e.stopPropagation()} className="ui standard modal visible active">
+                <i onClick={props.onDismiss} className="close icon"></i>
                 <div className="header">
                     {props.title}
                 </div>
